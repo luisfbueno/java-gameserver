@@ -1,25 +1,22 @@
 import java.net.*;
 import java.io.*;
 
-public class Cliente {
+public class Cliente extends Thread {
+		Socket socket = null;
+	  static DataInputStream is = null;
+		static DataOutputStream os = null;
 
-		public static void main(String[] args){
-				Socket socket = null;
-				DataInputStream input;
-
-				try {
-           socket = new Socket("192.168.0.12", 80);
-    		}
+		public void run(){
 
 				try {
-       			input = new DataInputStream(socket.getInputStream());
-    		}
-    		catch (IOException e) {
-       		System.out.println(e);
-    		}
-
-
+						socket = new Socket("127.0.0.1", 80);
+				}catch(IOException e){
+						System.out.println(e);
+						}
 
 		}
 
+		public static void main(String[] args){
+				new Cliente().start();
+		}
 }
