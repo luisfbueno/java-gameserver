@@ -13,6 +13,7 @@ public class Teste extends JPanel implements MouseMotionListener {
 			this.setVisible(true);
 	}
 
+	//Funções do MouseMotionListener
 	public void mouseMoved(MouseEvent e){
 		posX = e.getX();
 		posY = e.getY();
@@ -30,11 +31,13 @@ public class Teste extends JPanel implements MouseMotionListener {
 	}
 
 	public static void main(String[] args){
-			JFrame f = new JFrame("Jogo");
-			f.add(new Teste());
-			f.setVisible(true);
-			f.setSize(400,400);
-			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			JFrame telaJogo = new JFrame("Jogo");
+			telaJogo.add(new Teste());
+			telaJogo.setVisible(true);
+			telaJogo.setSize(400,400);
+			telaJogo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+			new Cliente(telaJogo).start();
 	}
 
 }

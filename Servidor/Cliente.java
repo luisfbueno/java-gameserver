@@ -1,10 +1,18 @@
 import java.net.*;
 import java.io.*;
+import javax.swing.*;
+import java.awt.*;
 
 public class Cliente extends Thread {
 		Socket socket = null;
 	  static DataInputStream is = null;
 		static DataOutputStream os = null;
+		JFrame programa;
+
+		public Cliente(JFrame tela) { //Construtor
+			this.programa = tela;
+
+		}
 
 		public void run(){
 
@@ -19,10 +27,9 @@ public class Cliente extends Thread {
 
 				System.out.println("Cliente Conectou!");
 
-				
 		}
-
+/*
 		public static void main(String[] args){
-				new Cliente().start();
-		}
+				new Cliente(new Teste()).start();
+		}*/
 }

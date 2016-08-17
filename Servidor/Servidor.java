@@ -44,14 +44,17 @@ public class Servidor {
 
           Servindo (Socket clientSocket){ //Construtor
             this.clientSocket = clientSocket;
-          }
-
-          public void run() {
-
-              System.out.println(playerCount++);
 
 
-          }
+            try{
+            DataInputStream is = new DataInputStream(clientSocket.getInputStream());
+            os[playerCount] = new DataOutputStream(clientSocket.getOutputStream());
+            playerCount++;
+            }catch(IOException e){
+              System.out.println(e);
+            }
+
+         }
 
 
-      }
+     }
