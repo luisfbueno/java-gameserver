@@ -19,12 +19,7 @@ public class Servidor {
       try{ //Aguarda cliente 1
         System.out.println("Aguardando jogador 1");
         player1 = serverSocket.accept();
-      } catch(IOException e){
-        System.out.println(e);
-        }
-
-      try{ //Aguarda cliente 2
-        System.out.println("Aguardando jogador 2");
+				System.out.println("Aguardando jogador 2");
         player2 = serverSocket.accept();
       } catch(IOException e){
         System.out.println(e);

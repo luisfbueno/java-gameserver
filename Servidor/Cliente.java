@@ -10,10 +10,16 @@ public class Cliente extends Thread {
 
 				try {
 						socket = new Socket("127.0.0.1", 80);
+
+      			is = new DataInputStream(socket.getInputStream());
+						os = new DataOutputStream(socket.getOutputStream());
 				}catch(IOException e){
 						System.out.println(e);
 						}
 
+				System.out.println("Cliente Conectou!");
+
+				
 		}
 
 		public static void main(String[] args){
