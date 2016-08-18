@@ -7,10 +7,17 @@ public class Cliente extends Thread {
 		Socket socket = null;
 	  static DataInputStream is = null;
 		static DataOutputStream os = null;
-		JFrame programa;
+		JFrame window;
+		Teste game;
 
-		public Cliente(JFrame tela) { //Construtor
-			this.programa = tela;
+		public Cliente(Teste tela) { //Construtor
+			game = tela;
+			window = new JFrame("Jogo");
+			window.add(tela);
+			window.setVisible(true);
+			window.setSize(400,400);
+			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 		}
 
@@ -22,19 +29,22 @@ public class Cliente extends Thread {
       			is = new DataInputStream(socket.getInputStream());
 						os = new DataOutputStream(socket.getOutputStream());
 
-						int playerNumber = is.readInt();
+							int playerNumber = is.readInt();
 
-						System.out.println(playerNumber);
+							if(playerNumber == 2)
+								game.setPlaying(true);
+
+							System.out.println(playerNumber);
 
 				}catch(IOException e){
 						System.out.println(e);
 						}
 
-				System.out.println("Cliente Conectou!");
+
 
 		}
-
+/*
 		public static void main(String[] args){
 				new Cliente(null).start();
-		}
+		}*/
 }

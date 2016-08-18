@@ -25,8 +25,8 @@ public class Servidor {
         System.out.println(e);
         }
 
-      new Servindo(player1).start();
-      new Servindo(player2).start();
+      new Servindo(player1,1).start();
+      new Servindo(player2,2).start();
 
       try {
   			serverSocket.close();
@@ -39,19 +39,28 @@ public class Servidor {
       class Servindo extends Thread { //Thread de servidor
 
           Socket clientSocket;
-          static int playerCount = 0;
           static DataOutputStream os[] = new DataOutputStream[2];
+          static int playerCount = 0;
+          private int playerNumber;
+          private int arrayNumber;
 
-          Servindo (Socket clientSocket){ //Construtor
+          Servindo (Socket clientSocket,int num){ //Construtor
             this.clientSocket = clientSocket;
+            playerNumber = num;
+            arrayNumber = num - 1;
+            playerCount++;
+            System.out.println(playerCount);
+          }
+
+          public void run() {
 
             try{
-              DataInputStream is = new DataInputStream(clientSocket.getInputStream());
-              os[playerCount] = new DataOutputStream(clientSocket.getOutputStream());
-              playerCount++;
 
-              int numEnvio = playerCount-1;
-              os[numEnvio].writeInt(playerCount);
+              DataInputStream is = new DataInputStream(clientSocket.getInputStream());
+              os[arrayNumber] = new DataOutputStream(clientSocket.getOutputStream());
+
+
+             os[arrayNumber].writeInt(playerNumber);
 
             }catch(IOException e){
               System.out.println(e);
