@@ -45,11 +45,14 @@ public class Servidor {
           Servindo (Socket clientSocket){ //Construtor
             this.clientSocket = clientSocket;
 
-
             try{
-            DataInputStream is = new DataInputStream(clientSocket.getInputStream());
-            os[playerCount] = new DataOutputStream(clientSocket.getOutputStream());
-            playerCount++;
+              DataInputStream is = new DataInputStream(clientSocket.getInputStream());
+              os[playerCount] = new DataOutputStream(clientSocket.getOutputStream());
+              playerCount++;
+
+              int numEnvio = playerCount-1;
+              os[numEnvio].writeInt(playerCount);
+
             }catch(IOException e){
               System.out.println(e);
             }

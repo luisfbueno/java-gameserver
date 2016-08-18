@@ -21,6 +21,11 @@ public class Cliente extends Thread {
 
       			is = new DataInputStream(socket.getInputStream());
 						os = new DataOutputStream(socket.getOutputStream());
+
+						int playerNumber = is.readInt();
+
+						System.out.println(playerNumber);
+
 				}catch(IOException e){
 						System.out.println(e);
 						}
@@ -28,8 +33,8 @@ public class Cliente extends Thread {
 				System.out.println("Cliente Conectou!");
 
 		}
-/*
+
 		public static void main(String[] args){
-				new Cliente(new Teste()).start();
-		}*/
+				new Cliente(null).start();
+		}
 }
