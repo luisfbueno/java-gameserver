@@ -16,7 +16,7 @@ public class Servidor {
       Socket player1 = null;
       Socket player2 = null;
 
-      try{ //Aguarda cliente 1
+      try{ //Aguarda cliente 1 e 2
         System.out.println("Aguardando jogador 1");
         player1 = serverSocket.accept();
 				System.out.println("Aguardando jogador 2");
@@ -25,7 +25,7 @@ public class Servidor {
         System.out.println(e);
         }
 
-      new Servindo(player1,1).start();
+      new Servindo(player1,1).start(); //Chama Threads de Servidor para cada um dos players
       new Servindo(player2,2).start();
 
       try {
@@ -46,6 +46,11 @@ public class Servidor {
           private int arrayNumber;
           static int mX,mY,pX,pY;
 
+          /*
+            Primeiro cliente -> playerNumber = 1,arrayNumber = 0;
+            Segundo cliente -> playerNumber = 2,arrayNumber = 0;
+          */
+
           Servindo (Socket clientSocket,int num){ //Construtor
             this.clientSocket = clientSocket;
             playerNumber = num;
@@ -57,13 +62,14 @@ public class Servidor {
 
             try{
 
+              //Pega strems do cliente correspondente
               is[arrayNumber] = new DataInputStream(clientSocket.getInputStream());
               os[arrayNumber] = new DataOutputStream(clientSocket.getOutputStream());
 
 
-             os[arrayNumber].writeInt(playerNumber);
+             os[arrayNumber].writeInt(playerNumber); //manda numero do player para o cliente saber de qual player se trata
 
-             new trocaCliente().start();
+             new trocaCliente().start(); //chama Thread de troca de dados entre cliente-servidor
 
             }catch(IOException e){
               System.out.println(e);
@@ -77,7 +83,7 @@ public class Servidor {
 
              do{
 
-             if(playerNumber == 1){
+             if(playerNumber == 1){ //Se for player 1, envia posições da mira e recebe posições do player
                 try{
                   mX = (is[arrayNumber]).readInt();
                   mY = (is[arrayNumber]).readInt();
@@ -90,7 +96,7 @@ public class Servidor {
 
              }
 
-             if(playerNumber == 2) {
+             if(playerNumber == 2) { //Se for player 2,envia posições do player e recebe da mira
                try{
                  pX = (is[arrayNumber]).readInt();
                  pY = (is[arrayNumber]).readInt();

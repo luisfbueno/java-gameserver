@@ -12,7 +12,8 @@ public class Cliente extends Thread {
 		int playerNumber;
 
 		public Cliente(Teste tela) { //Construtor
-			game = tela;
+			game = tela; //Recebe JPanel
+			//Cria frame para guardar o panel
 			window = new JFrame("Jogo");
 			window.add(tela);
 			window.setVisible(true);
@@ -27,14 +28,15 @@ public class Cliente extends Thread {
 				try {
 						socket = new Socket("127.0.0.1", 80);
 
+						//Pega streams do servidor
       			is = new DataInputStream(socket.getInputStream());
 						os = new DataOutputStream(socket.getOutputStream());
 
-							playerNumber = is.readInt();
+						playerNumber = is.readInt(); //pega numero do player
 
-							game.setPlayerType(playerNumber);
+						game.setPlayerType(playerNumber); //Manda para o jogo qual o tipo de player
 
-							new trocaServidor().start();
+						new trocaServidor().start(); //Inicia thread de troca de dados entre servidor-cliente
 
 				}catch(IOException e){
 						System.out.println(e);
@@ -48,7 +50,8 @@ public class Cliente extends Thread {
 
 						do{
 
-						if(playerNumber == 1){
+						if(playerNumber == 1){ //Se for player 1, manda posições da mira e recebe do player
+
 							try{
 								os.writeInt(game.getMiraX());
 								os.writeInt(game.getMiraY());
@@ -62,7 +65,7 @@ public class Cliente extends Thread {
 							}catch(IOException e){};
 						}
 
-						else if(playerNumber == 2){
+						else if(playerNumber == 2){ //Se for player 2, manda posições do player e recebe da mira
 							try{
 								os.writeInt(game.getPlayerX());
 								os.writeInt(game.getPlayerY());
