@@ -9,6 +9,7 @@ public class Teste extends JPanel implements MouseMotionListener {
 	private int health = 50;
 	private boolean clicked;
 	private boolean isPlaying;
+	private int playerType;
 
 	Teste() { //Construtor
 
@@ -16,12 +17,21 @@ public class Teste extends JPanel implements MouseMotionListener {
 			this.addMouseMotionListener(this);
 			this.setVisible(true);
 			this.isPlaying = false;
+			miraX = miraY = playerX = playerY = -100;
 	}
 
 	//Funções do MouseMotionListener
 	public void mouseMoved(MouseEvent e){
-		miraX = e.getX();
-		miraY = e.getY();
+		if(playerType == 1){
+			miraX = e.getX();
+			miraY = e.getY();
+		}
+
+		else if(playerType == 2){
+			playerX = e.getX();
+			playerY = e.getY();
+		}
+
 		repaint();
 	}
 
@@ -32,19 +42,20 @@ public class Teste extends JPanel implements MouseMotionListener {
 	public void paintComponent (Graphics g) { //Função de desenho
 		super.paintComponent(g);
 
-		if(!isPlaying){
 
-			g.drawString("Conectando Jogadores",200,200);
-		}
-
-		else{
 			g.drawOval(miraX,miraY,30,30);
 			g.drawRect(playerX,playerY,30,30);
-			}
+
+			System.out.println("Mira: " + miraX + " " + miraY + "Player: " + playerX + " " + playerY);
+
 
 		}
 
 	//Getters e Setters
+
+	public void setPlayerType(int n){
+		this.playerType = n;
+	}
 
 	public void setMiraX (int n){
 		this.miraX = n;

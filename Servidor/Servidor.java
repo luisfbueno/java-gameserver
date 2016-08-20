@@ -40,27 +40,30 @@ public class Servidor {
 
           Socket clientSocket;
           static DataOutputStream os[] = new DataOutputStream[2];
+          static DataInputStream is[] = new DataInputStream[2];
           static int playerCount = 0;
           private int playerNumber;
           private int arrayNumber;
+          int mX,mY,pX,pY;
 
           Servindo (Socket clientSocket,int num){ //Construtor
             this.clientSocket = clientSocket;
             playerNumber = num;
             arrayNumber = num - 1;
             playerCount++;
-            System.out.println(playerCount);
           }
 
           public void run() {
 
             try{
 
-              DataInputStream is = new DataInputStream(clientSocket.getInputStream());
+              is[arrayNumber] = new DataInputStream(clientSocket.getInputStream());
               os[arrayNumber] = new DataOutputStream(clientSocket.getOutputStream());
 
 
              os[arrayNumber].writeInt(playerNumber);
+
+             new trocaCliente().start();
 
             }catch(IOException e){
               System.out.println(e);
@@ -68,5 +71,48 @@ public class Servidor {
 
          }
 
+         class trocaCliente extends Thread {
 
-     }
+           public void run() {
+
+             do{
+
+             if(playerNumber == 1){
+                try{
+                  mX = (is[arrayNumber]).readInt();
+                  mY = (is[arrayNumber]).readInt();
+
+                  os[arrayNumber].writeInt(pX);
+                  os[arrayNumber].writeInt(pY);
+                  os[arrayNumber].flush();
+                  System.out.println("Player " + playerNumber + ": " + mX + " " + mY);
+                }catch(IOException e){};
+
+             }
+
+             if(playerNumber == 2) {
+               try{
+                 pX = (is[arrayNumber]).readInt();
+                 pY = (is[arrayNumber]).readInt();
+
+                 os[arrayNumber].writeInt(mX);
+                 os[arrayNumber].writeInt(mY);
+                 os[arrayNumber].flush();
+                 System.out.println("Player " + playerNumber + ": " + pX + " " + pY);
+               }catch(IOException e){};
+
+             }
+
+             try{
+ 								sleep(1000/60);
+ 						}catch(InterruptedException e){};
+
+           }while(true);
+
+         }
+
+
+
+      }
+
+  }
