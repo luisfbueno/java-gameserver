@@ -44,7 +44,7 @@ public class Servidor {
           static int playerCount = 0;
           private int playerNumber;
           private int arrayNumber;
-          int mX,mY,pX,pY;
+          static int mX,mY,pX,pY;
 
           Servindo (Socket clientSocket,int num){ //Construtor
             this.clientSocket = clientSocket;
@@ -84,8 +84,8 @@ public class Servidor {
 
                   os[arrayNumber].writeInt(pX);
                   os[arrayNumber].writeInt(pY);
-                  os[arrayNumber].flush();
-                  System.out.println("Player " + playerNumber + ": " + mX + " " + mY);
+                  //os[arrayNumber].flush();
+                  System.out.println("Player " + playerNumber + ": " + mX + " " + mY + " " + pX + " " + pY);
                 }catch(IOException e){};
 
              }
@@ -97,7 +97,7 @@ public class Servidor {
 
                  os[arrayNumber].writeInt(mX);
                  os[arrayNumber].writeInt(mY);
-                 os[arrayNumber].flush();
+                 //os[arrayNumber].flush();
                  System.out.println("Player " + playerNumber + ": " + pX + " " + pY);
                }catch(IOException e){};
 
