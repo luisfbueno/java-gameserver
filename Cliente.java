@@ -7,20 +7,13 @@ public class Cliente extends Thread {
 		Socket socket = null;
 	  static DataInputStream is = null;
 		static DataOutputStream os = null;
-		JFrame window;
-		Teste game;
+		JogoBase game;
+		JFrame gameWindow;
 		int playerNumber;
 
-		public Cliente(Teste tela) { //Construtor
-			game = tela; //Recebe JPanel
-			//Cria frame para guardar o panel
-			window = new JFrame("Jogo");
-			window.add(tela);
-			window.setVisible(true);
-			window.setSize(400,400);
-			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
+		public Cliente(JogoBase tela) { //Construtor
+			game = tela;
+			gameWindow = new Start(game);
 		}
 
 		public void run(){

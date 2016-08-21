@@ -70,6 +70,8 @@ public class Base extends Canvas {
   Window window = new Window();
   Image offscreen = null;
   Graphics offgraphics = null;
+  public MouseAdapter mouseAdapter;
+
   public Base(){
     Timer t = new Timer(15, new ActionListener() {
       @Override
@@ -80,7 +82,7 @@ public class Base extends Canvas {
     t.setCoalesce(false);
     t.start();
 
-    MouseAdapter mouseAdapter = new MouseAdapter() {
+    mouseAdapter = new MouseAdapter() {
 
       void mouse(MouseEvent e) {
         mouseX = e.getX();

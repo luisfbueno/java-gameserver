@@ -18,6 +18,8 @@ class JogoBase extends Base {
 	Rectangle player = new Rectangle(posX, posY, 111,97);
 	Rectangle mira = new Rectangle(mouseX, mouseY, 1,1);
 	obstaculos ob[] = new obstaculos[4];
+	int playerType;
+
 	public void init() {
 		try {
 			img[0]= ImageIO.read(new File("img/back.png"));
@@ -168,8 +170,47 @@ class JogoBase extends Base {
 			System.exit(1);
 		}
 
+	}
+
+	//Getters e Setters
+
+	public int getMiraX(){
+		return mouseX;
+	}
+
+	public void setMiraX(int n){
+		this.mouseX = n;
+	}
+
+	public int getMiraY(){
+		return mouseY;
+	}
+
+	public void setMiraY(int n){
+		this.mouseY = n;
+	}
+
+	public int getPlayerX(){
+		return posX;
+	}
+
+	public void setPlayerX(int n){
+		this.posX = n;
+	}
+
+	public int getPlayerY(){
+		return posY;
+	}
+
+	public void setPlayerY(int n){
+		this.posY = n;
+	}
+
+	public void setPlayerType(int n){
+		this.playerType = n;
 
 	}
+
 	boolean colisao(){  //Verifica se está colidindo com as determinadas plataformas
 		if(player.intersects(ob[0].coor) || player.intersects(ob[1].coor) || player.intersects(ob[2].coor)){
 			return true;
@@ -181,8 +222,7 @@ class JogoBase extends Base {
 		return false;
 	}
 	static public void main(String[] args){
-		Base canvas = new JogoBase();
-		new Start(canvas);
+		new Cliente(new JogoBase()).start();
 	}
 
 }
