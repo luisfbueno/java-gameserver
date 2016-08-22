@@ -45,6 +45,7 @@ public class Servidor {
           private int playerNumber;
           private int arrayNumber;
           static int mX,mY,pX,pY;
+          static boolean click;
 
           /*
             Primeiro cliente -> playerNumber = 1,arrayNumber = 0;
@@ -87,6 +88,7 @@ public class Servidor {
                 try{
                   mX = (is[arrayNumber]).readInt();
                   mY = (is[arrayNumber]).readInt();
+                  click = (is[arrayNumber]).readBoolean();
 
                   os[arrayNumber].writeInt(pX);
                   os[arrayNumber].writeInt(pY);
@@ -103,6 +105,7 @@ public class Servidor {
 
                  os[arrayNumber].writeInt(mX);
                  os[arrayNumber].writeInt(mY);
+                 os[arrayNumber].writeBoolean(click);
                  //os[arrayNumber].flush();
                  System.out.println("Player " + playerNumber + ": " + pX + " " + pY);
                }catch(IOException e){};
@@ -110,7 +113,7 @@ public class Servidor {
              }
 
              try{
- 								sleep(1000/60);
+ 								sleep(1000/120);
  						}catch(InterruptedException e){};
 
            }while(true);

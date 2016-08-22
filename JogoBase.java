@@ -139,6 +139,9 @@ class JogoBase extends Base {
 				posY += 5;
 			}
 		}
+		else{
+			player.setLocation(posX, posY);
+		}
 			//verifica se o tiro acertou o player
 			if(player.intersects(mira) && mousePressed && tempo == 0){
 				acertou = true;
@@ -155,7 +158,7 @@ class JogoBase extends Base {
 			//rectangle da mira, mudando a posição
 			mira.setLocation(mouseX, mouseY);
 			//desenhando a mira
-		
+
 
 			g.drawImage(img[6],mouseX-50,mouseY-50, 100, 100, this);
 		}
@@ -179,7 +182,13 @@ class JogoBase extends Base {
 
 	//Getters e Setters
 
+	public boolean getClicked(){
+		return mousePressed;
+	}
 
+	public void setClicked (boolean b){
+		this.mousePressed = b;
+	}
 
 	public int getMiraX(){
 		return mouseX;

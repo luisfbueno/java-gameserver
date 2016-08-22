@@ -48,6 +48,7 @@ public class Cliente extends Thread {
 							try{
 								os.writeInt(game.getMiraX());
 								os.writeInt(game.getMiraY());
+								os.writeBoolean(game.getClicked());
 
 								//os.flush();
 
@@ -67,13 +68,14 @@ public class Cliente extends Thread {
 
 								game.setMiraX(is.readInt());
 								game.setMiraY(is.readInt());
+								game.setClicked(is.readBoolean());
 								game.repaint();
 								//System.out.println("Player " + playerNumber + ": " + game.getPlayerX(); + " " + game.getMiraY());
 							}catch(IOException e){};
 						}
 
 						try{
-								sleep(1000/60);
+								sleep(1000/120);
 						}catch(InterruptedException e){};
 
 					}while(true);
