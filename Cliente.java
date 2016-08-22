@@ -75,7 +75,7 @@ public class Cliente extends Thread {
 						}
 
 						try{
-								sleep(1000/120);
+								sleep(1000/480);
 						}catch(InterruptedException e){};
 
 					}while(true);
