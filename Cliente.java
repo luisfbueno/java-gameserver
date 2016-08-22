@@ -54,6 +54,7 @@ public class Cliente extends Thread {
 
 								game.setPlayerX(is.readInt());
 								game.setPlayerY(is.readInt());
+								game.setLargura(is.readInt());
 								game.repaint();
 								//System.out.println("Player " + playerNumber + ": " + game.getMiraX(); + " " + game.getMiraY());
 							}catch(IOException e){};
@@ -63,6 +64,7 @@ public class Cliente extends Thread {
 							try{
 								os.writeInt(game.getPlayerX());
 								os.writeInt(game.getPlayerY());
+								os.writeInt(game.getLargura());
 
 								//os.flush();
 

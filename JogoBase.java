@@ -226,10 +226,16 @@ class JogoBase extends Base {
 	public void setPlayerType(int n){
 		setTypee(n);
 		this.playerType = n;
-
-
 	}
 
+	public int getLargura (){
+		return largura;
+	}
+
+	public void setLargura(int n) {
+		this.largura = n;
+	}
+	
 	boolean colisao(){  //Verifica se está colidindo com as determinadas plataformas
 		if(player.intersects(ob[0].coor) || player.intersects(ob[1].coor) || player.intersects(ob[2].coor)){
 			return true;
