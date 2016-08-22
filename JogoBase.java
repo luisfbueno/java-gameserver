@@ -51,7 +51,8 @@ class JogoBase extends Base {
 		g.drawImage(img[0], 0, 0, getSize().width, getSize().height, this);
 
 
-		System.out.println(mouseX +"   " + mouseY + "  " + acertou + "  " + tempo + "  " + vidaPlayer);
+		// System.out.println(mouseX +"   " + mouseY + "  " + acertou + "  " + tempo + "  " + vidaPlayer);
+		// System.out.println(boo + " "+ playerType + " " + direita);
 
 		//O i é a variável de loop para controlar o print da vida do Player é usada no while seguinte.
 		if(i >= vidaPlayer){
@@ -95,6 +96,7 @@ class JogoBase extends Base {
 			}
 
 			//andou para a direita.
+			if(!boo){
 			if(direita){
 				if(largura < 0){
 					largura = -largura;
@@ -136,6 +138,7 @@ class JogoBase extends Base {
 				if(!colisao())
 				posY += 5;
 			}
+		}
 			//verifica se o tiro acertou o player
 			if(player.intersects(mira) && mousePressed && tempo == 0){
 				acertou = true;
@@ -152,6 +155,8 @@ class JogoBase extends Base {
 			//rectangle da mira, mudando a posição
 			mira.setLocation(mouseX, mouseY);
 			//desenhando a mira
+		
+
 			g.drawImage(img[6],mouseX-50,mouseY-50, 100, 100, this);
 		}
 
@@ -174,6 +179,8 @@ class JogoBase extends Base {
 
 	//Getters e Setters
 
+
+
 	public int getMiraX(){
 		return mouseX;
 	}
@@ -184,6 +191,7 @@ class JogoBase extends Base {
 
 	public int getMiraY(){
 		return mouseY;
+
 	}
 
 	public void setMiraY(int n){
@@ -207,7 +215,9 @@ class JogoBase extends Base {
 	}
 
 	public void setPlayerType(int n){
+		setTypee(n);
 		this.playerType = n;
+
 
 	}
 
