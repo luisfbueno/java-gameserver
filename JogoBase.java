@@ -17,7 +17,7 @@ class JogoBase extends Base {
 	int posX = 50,posY = 500, altura = 97, largura = 111, i=0 , vidaPlayer = 5, imgVida = 5 ,tempo=0;
 	Rectangle player = new Rectangle(posX, posY, 111,97);
 	Rectangle mira = new Rectangle(mouseX, mouseY, 1,1);
-	obstaculos ob[] = new obstaculos[4];
+	obstaculos ob[] = new obstaculos[5];
 	int playerType;
 
 	public void init() {
@@ -41,7 +41,8 @@ class JogoBase extends Base {
 		ob[2] = new obstaculos(160,230, 272, 72);
 		ob[0] = new obstaculos(450,480, 272, 72);
 		ob[1] = new obstaculos(600,80, 272, 72);
-		ob[3] = new obstaculos(450,20,60,60);
+		ob[3] = new obstaculos(450,20,50,50);
+		ob[4] = new obstaculos(450,20,60,60);
 
 	}
 
@@ -51,7 +52,7 @@ class JogoBase extends Base {
 		g.drawImage(img[0], 0, 0, getSize().width, getSize().height, this);
 
 
-		// System.out.println(mouseX +"   " + mouseY + "  " + acertou + "  " + tempo + "  " + vidaPlayer);
+		System.out.println("   " + pegouEstrela);
 		// System.out.println(boo + " "+ playerType + " " + direita);
 
 		//O i é a variável de loop para controlar o print da vida do Player é usada no while seguinte.
@@ -63,6 +64,9 @@ class JogoBase extends Base {
 
 		//esse if é para ver se o jogador está vivo (não perdeu) ou se ele não pegou a estrela (não ganhou)
 		if (vidaPlayer != 0 && !pegouEstrela) {
+			if (player.intersects(ob[4].coor) && playerType == 1){
+				pegouEstrela = true;
+			}
 			//Desenha a estrela e os obstáculos
 			g.drawImage(img[2],450,40, 60, 60, this);
 			g.drawImage(img[3],450,480, 272, 72, this);
@@ -235,12 +239,12 @@ class JogoBase extends Base {
 	public void setLargura(int n) {
 		this.largura = n;
 	}
-	
+
 	boolean colisao(){  //Verifica se está colidindo com as determinadas plataformas
 		if(player.intersects(ob[0].coor) || player.intersects(ob[1].coor) || player.intersects(ob[2].coor)){
 			return true;
 		}
-		else if (player.intersects(ob[3].coor)){
+		else if (player.intersects(ob[3].coor) && playerType == 2){
 			pegouEstrela = true;
 			return false;
 		}
