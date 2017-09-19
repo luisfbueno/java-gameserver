@@ -2,11 +2,11 @@
 
 Simple java multiplayer game with client-server sockets connection.  
 
-##Example  
+## Example  
 ![Exemplo](img/example.png)
 
-##To run
+## To run
  `javac Servidor.java`  
  `javac Cliente.java`  
  `java Servidor`  
- `java Cliente` (2x)
+ `java JogoBase` (2x)
